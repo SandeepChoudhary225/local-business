@@ -1,0 +1,246 @@
+﻿{
+    "name":  "Local Business AI + SEO + Web Development Prospecting",
+    "nodes":  [
+                  {
+                      "parameters":  {
+
+                                     },
+                      "id":  "manual-trigger",
+                      "name":  "Manual Trigger",
+                      "type":  "n8n-nodes-base.manualTrigger",
+                      "typeVersion":  1,
+                      "position":  [
+                                       0,
+                                       300
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "city",
+                                                                                     "name":  "city",
+                                                                                     "type":  "string",
+                                                                                     "value":  "Jaipur"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "country",
+                                                                                     "name":  "country",
+                                                                                     "type":  "string",
+                                                                                     "value":  "India"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "radiusMeters",
+                                                                                     "name":  "radiusMeters",
+                                                                                     "type":  "number",
+                                                                                     "value":  10000
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "maxLeads",
+                                                                                     "name":  "maxLeads",
+                                                                                     "type":  "number",
+                                                                                     "value":  25
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "outputFilePath",
+                                                                                     "name":  "outputFilePath",
+                                                                                     "type":  "string",
+                                                                                     "value":  "C:\\Users\\choud\\OneDrive\\Desktop\\main\\New folder\\leads\\local-business-prospects.csv"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "overpassUrl",
+                                                                                     "name":  "overpassUrl",
+                                                                                     "type":  "string",
+                                                                                     "value":  "https://overpass-api.de/api/interpreter"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "userAgent",
+                                                                                     "name":  "userAgent",
+                                                                                     "type":  "string",
+                                                                                     "value":  "local-business-prospecting-n8n/1.0 (Jaipur local pilot)"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "useAI",
+                                                                                     "name":  "useAI",
+                                                                                     "type":  "boolean",
+                                                                                     "value":  true
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "lmStudioBaseUrl",
+                                                                                     "name":  "lmStudioBaseUrl",
+                                                                                     "type":  "string",
+                                                                                     "value":  "={{$env.OPENAI_COMPATIBLE_BASE_URL}}"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "lmStudioModel",
+                                                                                     "name":  "lmStudioModel",
+                                                                                     "type":  "string",
+                                                                                     "value":  "={{$env.OPENAI_COMPATIBLE_MODEL}}"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "searxngEnabled",
+                                                                                     "name":  "searxngEnabled",
+                                                                                     "type":  "boolean",
+                                                                                     "value":  false
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "searxngBaseUrl",
+                                                                                     "name":  "searxngBaseUrl",
+                                                                                     "type":  "string",
+                                                                                     "value":  "http://localhost:8080"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "amenityRegex",
+                                                                                     "name":  "amenityRegex",
+                                                                                     "type":  "string",
+                                                                                     "value":  "restaurant|cafe|dentist|clinic|doctors|veterinary|gym|bar|fast_food"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "shopRegex",
+                                                                                     "name":  "shopRegex",
+                                                                                     "type":  "string",
+                                                                                     "value":  "supermarket|bakery|clothes|hairdresser|beauty|car_repair|furniture|electronics"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "officeRegex",
+                                                                                     "name":  "officeRegex",
+                                                                                     "type":  "string",
+                                                                                     "value":  "lawyer|accountant|insurance|estate_agent|consulting|architect"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "craftRegex",
+                                                                                     "name":  "craftRegex",
+                                                                                     "type":  "string",
+                                                                                     "value":  "plumber|electrician|roofer|carpenter|builder|glazier|painter|landscaper"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "tourismRegex",
+                                                                                     "name":  "tourismRegex",
+                                                                                     "type":  "string",
+                                                                                     "value":  "hotel|guest_house|hostel|motel|attraction"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "aiApiKey",
+                                                                                     "name":  "aiApiKey",
+                                                                                     "type":  "string",
+                                                                                     "value":  "={{$env.OPENAI_COMPATIBLE_API_KEY}}"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "id":  "configuration",
+                      "name":  "Configuration",
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       220,
+                                       300
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const c=$input.first().json;const http=o=\u003ethis.helpers.httpRequest(o);const pick=(...v)=\u003ev.find(x=\u003ex!==undefined\u0026\u0026x!==null\u0026\u0026String(x).trim()!==\u0027\u0027)??null;const quote=String.fromCharCode(34);const trimSlash=s=\u003e{let v=String(s||\u0027\u0027);while(v.endsWith(\u0027/\u0027))v=v.slice(0,-1);return v;};const geo=await http({method:\u0027GET\u0027,url:\u0027https://nominatim.openstreetmap.org/search?q=\u0027+encodeURIComponent(String(c.city)+\u0027, \u0027+String(c.country))+\u0027\u0026format=jsonv2\u0026limit=1\u0027,headers:{\u0027User-Agent\u0027:c.userAgent},json:true,timeout:15000});const place=Array.isArray(geo)?geo[0]:geo;if(!place||!place.lat||!place.lon)throw new Error(\u0027City could not be geocoded. Edit city and country in Configuration.\u0027);const types=[[\u0027amenity\u0027,c.amenityRegex],[\u0027shop\u0027,c.shopRegex],[\u0027office\u0027,c.officeRegex],[\u0027craft\u0027,c.craftRegex],[\u0027tourism\u0027,c.tourismRegex]].filter(x=\u003ex[1]);const blocks=types.map(x=\u003e{const r=String(x[1]).replaceAll(quote,\u0027\u0027);return \u0027nwr[\u0027+quote+x[0]+quote+\u0027~\u0027+quote+r+quote+\u0027](around:\u0027+(Number(c.radiusMeters)||10000)+\u0027,\u0027+place.lat+\u0027,\u0027+place.lon+\u0027);\u0027;});const query=\u0027[out:json][timeout:60];(\u0027+blocks.join(\u0027\u0027)+\u0027);out center tags;\u0027;const osm=await http({method:\u0027POST\u0027,url:c.overpassUrl,headers:{\u0027User-Agent\u0027:c.userAgent,\u0027Content-Type\u0027:\u0027text/plain\u0027},body:query,json:true,timeout:70000});const elements=Array.isArray(osm?.elements)?osm.elements:[];const seen=new Set();const out=[];const value=(tags,...keys)=\u003epick(...keys.map(k=\u003etags[k]));const tagText=(html,tag)=\u003e{const low=String(html||\u0027\u0027).toLowerCase();const a=low.indexOf(\u0027\u003c\u0027+tag);if(a\u003c0)return null;const b=low.indexOf(\u0027\u003e\u0027,a);const e=low.indexOf(\u0027\u003c/\u0027+tag+\u0027\u003e\u0027,b+1);return b\u003e=0\u0026\u0026e\u003eb?String(html).slice(b+1,e).replaceAll(\u0027\u003c\u0027,\u0027 \u0027).replaceAll(\u0027\u003e\u0027,\u0027 \u0027).replaceAll(\u0027\\n\u0027,\u0027 \u0027).trim().slice(0,300):null;};const digits=x=\u003e{const s=String(x??\u0027\u0027).split(\u0027\u0027).filter(ch=\u003ech\u003e=\u00270\u0027\u0026\u0026ch\u003c=\u00279\u0027).join(\u0027\u0027);return s?Number.parseInt(s,10):null;};for(const e of elements.slice(0,Number(c.maxLeads)||25)){const t=e.tags||{};const name=value(t,\u0027name\u0027,\u0027brand\u0027);if(!name)continue;const center=e.center||e;const address=[t[\u0027addr:housenumber\u0027],t[\u0027addr:street\u0027],t[\u0027addr:city\u0027]].filter(Boolean).join(\u0027 \u0027);const key=(String(name)+\u0027|\u0027+address+\u0027|\u0027+String(center.lat||\u0027\u0027)+\u0027|\u0027+String(center.lon||\u0027\u0027)).toLowerCase();if(seen.has(key))continue;seen.add(key);let website=value(t,\u0027website\u0027,\u0027contact:website\u0027);if(website\u0026\u0026!String(website).startsWith(\u0027http\u0027))website=\u0027https://\u0027+website;let validUrl=null;try{if(website){const u=new URL(website);if(![\u0027localhost\u0027,\u0027127.0.0.1\u0027,\u00270.0.0.0\u0027].includes(u.hostname)\u0026\u0026!u.hostname.endsWith(\u0027.local\u0027))validUrl=u.toString();}}catch{}let html=\u0027\u0027;let status=null;let reachable=false;let fetchError=null;if(validUrl){try{const r=await http({method:\u0027GET\u0027,url:validUrl,headers:{\u0027User-Agent\u0027:c.userAgent},returnFullResponse:true,ignoreHttpStatusErrors:true,timeout:15000});status=r.statusCode||null;html=typeof r.body===\u0027string\u0027?r.body:JSON.stringify(r.body||\u0027\u0027);reachable=html.length\u003e0\u0026\u0026Number(status||0)\u003c500;validUrl=r.url||validUrl;}catch(err){fetchError=String(err.message||err).slice(0,200);}}else fetchError=\u0027No website URL listed in discovery source\u0027;const low=html.toLowerCase();const city=String(t[\u0027addr:city\u0027]||c.city||\u0027\u0027).toLowerCase();const title=tagText(html,\u0027title\u0027);const h1=tagText(html,\u0027h1\u0027);const hasDescription=low.includes(\u0027name=\u0027+quote+\u0027description\u0027+quote)||low.includes(\u0027name=\u0027+quote+\u0027description\u0027+quote);const hasViewport=low.includes(\u0027name=\u0027+quote+\u0027viewport\u0027+quote);const hasCanonical=low.includes(\u0027rel=\u0027+quote+\u0027canonical\u0027+quote);const hasSchema=low.includes(\u0027application/ld+json\u0027);const hasForm=low.includes(\u0027\u003cform\u0027)||low.includes(\u0027contact\u0027)||low.includes(\u0027request a quote\u0027);const hasBooking=low.includes(\u0027book\u0027)||low.includes(\u0027booking\u0027)||low.includes(\u0027appointment\u0027)||low.includes(\u0027calendly\u0027);const hasChat=low.includes(\u0027livechat\u0027)||low.includes(\u0027live chat\u0027)||low.includes(\u0027intercom\u0027)||low.includes(\u0027drift\u0027)||low.includes(\u0027tawk.to\u0027);const hasFaq=low.includes(\u0027faq\u0027)||low.includes(\u0027frequently asked\u0027);const localMention=Boolean(city\u0026\u0026low.includes(city));const https=Boolean(validUrl\u0026\u0026validUrl.startsWith(\u0027https://\u0027));const seoChecks=[Boolean(title),hasDescription,Boolean(h1),hasViewport,hasCanonical,hasSchema,localMention,https];const seoScore=Math.round(seoChecks.filter(Boolean).length/seoChecks.length*100);const seoOpportunityScore=100-seoScore;const webChecks=[!validUrl,!reachable,!https,!hasViewport,!h1,!hasSchema];const webDevelopmentOpportunityScore=Math.round(webChecks.filter(Boolean).length/webChecks.length*100);const automationChecks=[!hasForm,!hasBooking,!hasChat,!hasFaq];const aiAutomationOpportunityScore=Math.round(automationChecks.filter(Boolean).length/automationChecks.length*100);const priorityScore=Math.round(seoOpportunityScore*.4+webDevelopmentOpportunityScore*.35+aiAutomationOpportunityScore*.25);const reviewCount=digits(value(t,\u0027review_count\u0027,\u0027reviews\u0027,\u0027contact:review_count\u0027));let tier=\u0027proxy-low\u0027;let tierBasis=\u0027No review count was available; tier is a website and marketing maturity proxy.\u0027;if(Number.isFinite(reviewCount)){tier=reviewCount\u003c50?\u0027low\u0027:\u0027mid\u0027;tierBasis=\u0027Source review count \u0027+reviewCount+\u0027; threshold is 50 reviews.\u0027;}else if(priorityScore\u003c55\u0026\u0026validUrl\u0026\u0026reachable){tier=\u0027proxy-mid\u0027;tierBasis=\u0027No review count was available; stronger website and marketing signals produced proxy-mid.\u0027;}let visibilityRank=null;let visibilitySource=\u0027disabled\u0027;if(c.searxngEnabled\u0026\u0026c.searxngBaseUrl){try{const sr=await http({method:\u0027GET\u0027,url:trimSlash(c.searxngBaseUrl)+\u0027/search?q=\u0027+encodeURIComponent(String(name)+\u0027 \u0027+String(c.city))+\u0027\u0026format=json\u0026language=en-US\u0027,headers:{\u0027User-Agent\u0027:c.userAgent},json:true,timeout:15000});const results=Array.isArray(sr?.results)?sr.results:[];const host=validUrl?new URL(validUrl).hostname.replace(\u0027www.\u0027,\u0027\u0027):null;for(let i=0;i\u003cresults.length;i++){try{if(host\u0026\u0026new URL(results[i].url).hostname.replace(\u0027www.\u0027,\u0027\u0027)===host){visibilityRank=i+1;break;}}catch{}}visibilitySource=\u0027SearXNG visibility proxy\u0027;}catch(err){visibilitySource=\u0027SearXNG error: \u0027+String(err.message||err).slice(0,140);}}const evidence=\u0027Discovery: https://www.openstreetmap.org/\u0027+e.type+\u0027/\u0027+e.id+\u0027 | Website: \u0027+(validUrl||\u0027not listed\u0027)+\u0027 | SEO signals: \u0027+seoChecks.filter(Boolean).length+\u0027/\u0027+seoChecks.length+\u0027 | Website reachable: \u0027+reachable+\u0027 | Automation signals: form=\u0027+hasForm+\u0027, booking=\u0027+hasBooking+\u0027, chat=\u0027+hasChat+\u0027, FAQ=\u0027+hasFaq+\u0027 | Visibility: \u0027+(visibilityRank||\u0027unknown\u0027)+\u0027 (\u0027+visibilitySource+\u0027)\u0027;let ai={summary:\u0027Deterministic audit completed; local model was not used.\u0027,opportunities:\u0027Review the score components and verify the website manually.\u0027,suggested_offer:\u0027Offer a short website, local SEO, and automation opportunity review.\u0027,next_step:\u0027Manually verify the evidence before adding this prospect to an outreach queue.\u0027};if(c.useAI\u0026\u0026c.lmStudioBaseUrl){try{const mr=await http({method:\u0027POST\u0027,url:trimSlash(c.lmStudioBaseUrl)+\u0027/chat/completions\u0027,headers:Object.assign({\u0027Content-Type\u0027:\u0027application/json\u0027},c.aiApiKey?{\u0027Authorization\u0027:\u0027Bearer \u0027+String(c.aiApiKey)}:{}),body:{model:c.lmStudioModel||\u0027local-model\u0027,temperature:.2,messages:[{role:\u0027system\u0027,content:\u0027Return only valid JSON with keys summary, opportunities, suggested_offer, next_step. Do not invent facts, owners, rankings, results, or testimonials.\u0027},{role:\u0027user\u0027,content:JSON.stringify({businessName:name,category:value(t,\u0027amenity\u0027,\u0027shop\u0027,\u0027office\u0027,\u0027craft\u0027,\u0027tourism\u0027),city:c.city,websiteUrl:validUrl,tier,tierBasis,priorityScore,seoOpportunityScore,webDevelopmentOpportunityScore,aiAutomationOpportunityScore,signals:{title:Boolean(title),description:hasDescription,h1:Boolean(h1),viewport:hasViewport,canonical:hasCanonical,schema:hasSchema,localMention,form:hasForm,booking:hasBooking,chat:hasChat,faq:hasFaq},visibilityRank,evidence})}]},json:true,timeout:30000});const content=mr?.choices?.[0]?.message?.content||\u0027\u0027;const a=content.indexOf(\u0027{\u0027);const b=content.lastIndexOf(\u0027}\u0027);if(a\u003e=0\u0026\u0026b\u003ea)try{ai={...ai,...JSON.parse(content.slice(a,b+1))};}catch{} }catch(err){ai.summary=\u0027Local model unavailable; deterministic audit used (\u0027+String(err.message||err).slice(0,150)+\u0027).\u0027;}}out.push({json:{source:\u0027OpenStreetMap/Overpass\u0027,sourceUrl:\u0027https://www.openstreetmap.org/\u0027+e.type+\u0027/\u0027+e.id,businessName:name,category:value(t,\u0027amenity\u0027,\u0027shop\u0027,\u0027office\u0027,\u0027craft\u0027,\u0027tourism\u0027),address:address||null,city:value(t,\u0027addr:city\u0027)||c.city,country:value(t,\u0027addr:country\u0027)||c.country,latitude:center.lat||null,longitude:center.lon||null,websiteUrl:validUrl,phone:value(t,\u0027phone\u0027,\u0027contact:phone\u0027),reviewCount,rating:value(t,\u0027rating\u0027,\u0027stars\u0027),tier,tierBasis,seoScore,seoOpportunityScore,webDevelopmentOpportunityScore,aiAutomationOpportunityScore,priorityScore,visibilityRank,visibilitySource,websiteReachable:reachable,websiteStatusCode:status,websiteSignals:JSON.stringify({title,hasDescription,h1,hasViewport,hasCanonical,hasSchema,hasForm,hasBooking,hasChat,hasFaq,localMention,https,fetchError}),evidence,aiSummary:String(ai.summary||\u0027\u0027),aiOpportunities:String(ai.opportunities||\u0027\u0027),aiSuggestedOffer:String(ai.suggested_offer||\u0027\u0027),aiNextStep:String(ai.next_step||\u0027\u0027),reviewStatus:\u0027needs-human-review\u0027,outputFilePath:c.outputFilePath}});}return out;"
+                                     },
+                      "id":  "discover-audit-score",
+                      "name":  "Discover, Audit + Score",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       520,
+                                       300
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "toFile",
+                                         "fileFormat":  "csv",
+                                         "options":  {
+                                                         "fileName":  "local-business-prospects.csv"
+                                                     }
+                                     },
+                      "id":  "convert-csv",
+                      "name":  "Convert to CSV",
+                      "type":  "n8n-nodes-base.spreadsheetFile",
+                      "typeVersion":  1,
+                      "position":  [
+                                       820,
+                                       300
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "fileName":  "={{$json.outputFilePath || \u0027/files/local-business-prospects.csv\u0027}}",
+                                         "dataPropertyName":  "data"
+                                     },
+                      "id":  "write-csv",
+                      "name":  "Write Review Queue CSV",
+                      "type":  "n8n-nodes-base.writeBinaryFile",
+                      "typeVersion":  1,
+                      "position":  [
+                                       1100,
+                                       300
+                                   ]
+                  }
+              ],
+    "connections":  {
+                        "Manual Trigger":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Configuration",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           },
+                        "Configuration":  {
+                                              "main":  [
+                                                           [
+                                                               {
+                                                                   "node":  "Discover, Audit + Score",
+                                                                   "type":  "main",
+                                                                   "index":  0
+                                                               }
+                                                           ]
+                                                       ]
+                                          },
+                        "Discover, Audit + Score":  {
+                                                        "main":  [
+                                                                     [
+                                                                         {
+                                                                             "node":  "Convert to CSV",
+                                                                             "type":  "main",
+                                                                             "index":  0
+                                                                         }
+                                                                     ]
+                                                                 ]
+                                                    },
+                        "Convert to CSV":  {
+                                               "main":  [
+                                                            [
+                                                                {
+                                                                    "node":  "Write Review Queue CSV",
+                                                                    "type":  "main",
+                                                                    "index":  0
+                                                                }
+                                                            ]
+                                                        ]
+                                           }
+                    },
+    "active":  false,
+    "settings":  {
+                     "executionOrder":  "v1"
+                 },
+    "versionId":  "local-business-prospecting-v1",
+    "meta":  {
+                 "templateCredsSetupCompleted":  true
+             },
+    "tags":  [
+
+             ]
+}
