@@ -131,7 +131,7 @@ useAI: false
 Then click **Execute Workflow**. A successful run should create:
 
 ```text
-C:\Users\choud\OneDrive\Desktop\main\New folder\leads\local-business-prospects.csv
+pathtofolderleads\local-business-prospects.csv
 ```
 
 After discovery and CSV writing work, set `useAI` to `true` and test the compatible endpoint.
@@ -158,7 +158,7 @@ https://nominatim.openstreetmap.org/search?q=Jaipur%2C%20India&format=jsonv2&lim
 Verify that:
 
 ```text
-outputFilePath = C:\Users\choud\OneDrive\Desktop\main\New folder\leads\local-business-prospects.csv
+outputFilePath = pathtofolder\leads\local-business-prospects.csv
 ```
 
 Also start n8n with:
