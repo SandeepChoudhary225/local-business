@@ -33,7 +33,7 @@ New folder/
 7. Writes the results to:
 
 ```text
-C:\Users\choud\OneDrive\Desktop\main\New folder\leads\local-business-prospects.csv
+pathtofolder\leads\local-business-prospects.csv
 ```
 
 ## Requirements
